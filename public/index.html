@@ -3,62 +3,126 @@
   <head>
     <meta charset="UTF-8" />
     <title>Map Test</title>
+    <script src="./bundle.js"></script>
   </head>
   <body>
     <div id="map"></div>
 
     <script>
-    window.PLACES = [
+    const PLACES = [
       // Europa
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 46.07, lng: 11.12, label: "Trento, Italy" },
-      { lat: 41.90, lng: 12.49, label: "Rome, Italy" },
-      { lat: 45.46, lng: 9.19, label: "Milano, Italy" },
-      { lat: 48.85, lng: 2.35, label: "Paris, France" },
-      { lat: 48.86, lng: 2.34, label: "Louvre, Paris" },
-      { lat: 51.51, lng: -0.13, label: "London, UK" },
-      { lat: 51.50, lng: -0.12, label: "Big Ben, London" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Alessandro" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Giulia" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Luca" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Martina" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Simone" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Francesca" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Davide" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Chiara" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Federico" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Elena" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Marco" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Laura" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Giovanni" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Sara" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Antonio" },
+      { lat: 46.07, lng: 11.12, label: "Trento", link: "https://www.google.it", name: "Valentina" },
+      { lat: 41.90, lng: 12.49, label: "Rome", link: "https://www.google.it", name: "Giuseppe" },
+      { lat: 45.46, lng: 9.19, label: "Milano", link: "https://www.google.it", name: "Francesco" },
+      { lat: 48.85, lng: 2.35, label: "Paris", link: "https://www.google.it", name: "Marie" },
+      { lat: 48.86, lng: 2.34, label: "Louvre", link: "https://www.google.it", name: "Jean" },
+      { lat: 51.51, lng: -0.13, label: "London", link: "https://www.google.it", name: "Oliver" },
+      { lat: 51.50, lng: -0.12, label: "Big Ben", link: "https://www.google.it", name: "Emily" },
+      { lat: 52.52, lng: 13.40, label: "Berlin", link: "https://www.google.it", name: "Hans" },
+      { lat: 55.75, lng: 37.61, label: "Moscow", link: "https://www.google.it", name: "Olga" },
+      { lat: 59.93, lng: 30.33, label: "Saint Petersburg", link: "https://www.google.it", name: "Ivan" },
+      { lat: 50.08, lng: 14.42, label: "Prague", link: "https://www.google.it", name: "Petr" },
+      { lat: 48.21, lng: 16.37, label: "Vienna", link: "https://www.google.it", name: "Anna" },
+      { lat: 41.90, lng: 12.48, label: "Vatican City", link: "https://www.google.it", name: "Paolo" },
+      { lat: 53.33, lng: -6.26, label: "Dublin", link: "https://www.google.it", name: "Siobhan" },
+      { lat: 60.17, lng: 24.94, label: "Helsinki", link: "https://www.google.it", name: "Mikko" },
+      { lat: 40.42, lng: -3.70, label: "Madrid", link: "https://www.google.it", name: "Carlos" },
 
       // America
-      { lat: 40.71, lng: -74.00, label: "New York, USA" },
-      { lat: 40.72, lng: -74.01, label: "Wall Street, NY" },
-      { lat: 34.05, lng: -118.24, label: "Los Angeles, USA" },
-      { lat: 37.77, lng: -122.42, label: "San Francisco, USA" },
-
-      // Asia
-      { lat: 35.68, lng: 139.76, label: "Tokyo, Japan" },
-      { lat: 35.69, lng: 139.77, label: "Shinjuku, Tokyo" },
-      { lat: 31.23, lng: 121.47, label: "Shanghai, China" },
-      { lat: 28.61, lng: 77.20, label: "New Delhi, India" },
-
-      // Oceania
-      { lat: -33.87, lng: 151.21, label: "Sydney, Australia" },
-      { lat: -37.81, lng: 144.96, label: "Melbourne, Australia" },
-
-      // Africa
-      { lat: -1.29, lng: 36.82, label: "Nairobi, Kenya" },
-      { lat: 30.04, lng: 31.23, label: "Cairo, Egypt" },
+      { lat: 40.71, lng: -74.00, label: "New York, USA", link: "https://www.google.it", name: "John" },
+      { lat: 34.05, lng: -118.24, label: "Los Angeles", link: "https://www.google.it", name: "Emma" },
+      { lat: 37.77, lng: -122.42, label: "San Francisco", link: "https://www.google.it", name: "William" },
+      { lat: 41.88, lng: -87.63, label: "Chicago", link: "https://www.google.it", name: "Olivia" },
+      { lat: 29.76, lng: -95.37, label: "Houston", link: "https://www.google.it", name: "James" },
+      { lat: 39.95, lng: -75.16, label: "Philadelphia", link: "https://www.google.it", name: "Sophia" },
+      { lat: 32.77, lng: -96.79, label: "Dallas", link: "https://www.google.it", name: "Michael" },
+      { lat: 25.76, lng: -80.19, label: "Miami", link: "https://www.google.it", name: "Isabella" },
+      { lat: 33.44, lng: -112.07, label: "Phoenix", link: "https://www.google.it", name: "Benjamin" },
+      { lat: 47.60, lng: -122.33, label: "Seattle", link: "https://www.google.it", name: "Emily" },
+      { lat: 39.74, lng: -104.99, label: "Denver", link: "https://www.google.it", name: "Daniel" },
+      { lat: 42.36, lng: -71.05, label: "Boston", link: "https://www.google.it", name: "Hannah" },
+      { lat: 38.90, lng: -77.03, label: "Washington DC", link: "https://www.google.it", name: "Matthew" },
+      { lat: 43.65, lng: -79.38, label: "Toronto", link: "https://www.google.it", name: "Liam" },
+      { lat: 45.50, lng: -73.56, label: "Montreal", link: "https://www.google.it", name: "Chloe" },
+      { lat: 19.43, lng: -99.13, label: "Mexico City", link: "https://www.google.it", name: "Diego" },
 
       // Sud America
-      { lat: -23.55, lng: -46.63, label: "São Paulo, Brazil" },
-      { lat: -22.90, lng: -43.19, label: "Rio de Janeiro, Brazil" }
+      { lat: -23.55, lng: -46.63, label: "São Paulo", link: "https://www.google.it", name: "Carlos" },
+      { lat: -22.90, lng: -43.19, label: "Rio de Janeiro", link: "https://www.google.it", name: "Mariana" },
+      { lat: -34.60, lng: -58.38, label: "Buenos Aires", link: "https://www.google.it", name: "Sofia" },
+      { lat: -33.45, lng: -70.66, label: "Santiago", link: "https://www.google.it", name: "Matias" },
+      { lat: -12.04, lng: -77.03, label: "Lima", link: "https://www.google.it", name: "Valeria" },
+      { lat: -1.29, lng: -48.48, label: "Belém", link: "https://www.google.it", name: "João" },
+      { lat: -34.92, lng: -57.95, label: "Montevideo", link: "https://www.google.it", name: "Lucia" },
+      { lat: -8.05, lng: -34.90, label: "Recife", link: "https://www.google.it", name: "Rafael" },
+      { lat: -16.50, lng: -68.15, label: "La Paz", link: "https://www.google.it", name: "Ana" },
+      { lat: -12.05, lng: -77.03, label: "Lima Centro", link: "https://www.google.it", name: "Diego" },
+
+      // Africa
+      { lat: -1.29, lng: 36.82, label: "Nairobi", link: "https://www.google.it", name: "Peter" },
+      { lat: 30.04, lng: 31.23, label: "Cairo", link: "https://www.google.it", name: "Fatima" },
+      { lat: -26.20, lng: 28.04, label: "Johannesburg", link: "https://www.google.it", name: "Sipho" },
+      { lat: 6.52, lng: 3.37, label: "Lagos", link: "https://www.google.it", name: "Ade" },
+      { lat: 14.69, lng: -17.44, label: "Dakar", link: "https://www.google.it", name: "Aissatou" },
+      { lat: 9.03, lng: 38.74, label: "Addis Ababa", link: "https://www.google.it", name: "Abebe" },
+      { lat: 4.04, lng: 9.71, label: "Douala", link: "https://www.google.it", name: "Chantal" },
+      { lat: 1.29, lng: 103.85, label: "Singapore", link: "https://www.google.it", name: "Wei" },
+      { lat: -4.03, lng: 39.67, label: "Dar es Salaam", link: "https://www.google.it", name: "Amina" },
+
+      // Asia
+      { lat: 35.68, lng: 139.76, label: "Tokyo", link: "https://www.google.it", name: "Hiroshi" },
+      { lat: 35.69, lng: 139.77, label: "Shinjuku", link: "https://www.google.it", name: "Yuki" },
+      { lat: 31.23, lng: 121.47, label: "Shanghai", link: "https://www.google.it", name: "Li Wei" },
+      { lat: 28.61, lng: 77.20, label: "New Delhi", link: "https://www.google.it", name: "Anita" },
+      { lat: 13.08, lng: 80.27, label: "Chennai", link: "https://www.google.it", name: "Raj" },
+      { lat: 19.07, lng: 72.87, label: "Mumbai", link: "https://www.google.it", name: "Priya" },
+      { lat: 39.91, lng: 116.40, label: "Beijing", link: "https://www.google.it", name: "Liang" },
+      { lat: 31.63, lng: 74.87, label: "Lahore", link: "https://www.google.it", name: "Aisha" },
+      { lat: 37.56, lng: 126.97, label: "Seoul", link: "https://www.google.it", name: "Minho" },
+      { lat: 13.75, lng: 100.50, label: "Bangkok", link: "https://www.google.it", name: "Nok" },
+
+      // Oceania
+      { lat: -33.87, lng: 151.21, label: "Sydney", link: "https://www.google.it", name: "Jack" },
+      { lat: -37.81, lng: 144.96, label: "Melbourne", link: "https://www.google.it", name: "Olivia" },
+      { lat: -36.85, lng: 174.76, label: "Auckland", link: "https://www.google.it", name: "Liam" },
+      { lat: -17.82, lng: 31.05, label: "Port Vila", link: "https://www.google.it", name: "Ella" },
+      { lat: -20.16, lng: 57.50, label: "Mauritius", link: "https://www.google.it", name: "Pierre" },
+
+      // aggiungi altri fino a superare 100 punti
+      { lat: 35.68, lng: 51.39, label: "Tehran", link: "https://www.google.it", name: "Ali" },
+      { lat: 30.05, lng: 31.24, label: "Cairo Center", link: "https://www.google.it", name: "Mona" },
+      { lat: 48.85, lng: 2.35, label: "Notre Dame", link: "https://www.google.it", name: "Pierre" },
+      { lat: 52.37, lng: 4.90, label: "Amsterdam", link: "https://www.google.it", name: "Sanne" },
+      { lat: 50.08, lng: 14.42, label: "Prague Castle", link: "https://www.google.it", name: "Eva" },
+      { lat: 59.33, lng: 18.06, label: "Stockholm", link: "https://www.google.it", name: "Karl" },
+      { lat: 55.95, lng: -3.19, label: "Edinburgh", link: "https://www.google.it", name: "Fiona" },
+      { lat: 41.90, lng: 12.48, label: "Pantheon", link: "https://www.google.it", name: "Giorgio" },
+      { lat: 38.72, lng: -9.14, label: "Lisbon", link: "https://www.google.it", name: "Sofia" },
+      { lat: 37.98, lng: 23.73, label: "Athens", link: "https://www.google.it", name: "Nikos" },
+      { lat: 43.70, lng: 7.26, label: "Monaco", link: "https://www.google.it", name: "Luc" },
+      { lat: 50.07, lng: 14.43, label: "Prague Old Town", link: "https://www.google.it", name: "Jan" }
     ];
+    //simulo una fetch
+    setTimeout(() => {
+      window.setPlaces(PLACES);
+    }, 5000)
     </script>
 
-    <script src="./bundle.js"></script>
+    
   </body>
 </html>
