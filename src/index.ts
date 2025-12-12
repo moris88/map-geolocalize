@@ -1,64 +1,81 @@
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
-import "./index.css";
 import "leaflet.markercluster";
 import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import { Places } from "./types";
 
-const map = L.map("map").setView([0, 0], 2);
+import "./index.scss";
+import "./map.scss";
 
-L.tileLayer("https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png", {
-  maxZoom: 20,
-}).addTo(map);
+const map = L.map("map", {
+  zoomControl: false,
+  zoomSnap: 0.5,   // permette zoom frazionari
+  zoomDelta: 0.5,  // riduce incremento/decremento di zoom
+}).setView([0, 0], 2);
+
+// aggiungo uno zoom control in basso a destra
+L.control.zoom({ position: "bottomright" }).addTo(map);
+
+// attribution in basso a destra
+map.attributionControl.setPosition("bottomright");
+
+L.tileLayer(
+  "https://cartodb-basemaps-a.global.ssl.fastly.net/light_all/{z}/{x}/{y}{r}.png",
+  { maxZoom: 20 }
+).addTo(map);
 
 const markers = L.markerClusterGroup({
-  iconCreateFunction: function(cluster) {
-    // Recupera tutti i marker del cluster
-    const markers = cluster.getAllChildMarkers();
+  iconCreateFunction(cluster) {
+    const total = cluster
+      .getAllChildMarkers()
+      .reduce((s, m: any) => s + (m.options.customCount || 0), 0);
 
-    // Somma dei count
-    const totalCount = markers.reduce((sum, m: any) => {
-      // m.options.icon.options.html contiene il tuo div con count
-      // però conviene allegare il dato direttamente al marker
-      console.log(m);
-      return sum + (m.options.customCount || 0);
-    }, 0);
+    let cfg;
+    if (total < 10) {
+      cfg = { cls: "marker-tiny", size: 30 };
+    } else if (total < 50) {
+      cfg = { cls: "marker-small", size: 30 };
+    } else if (total < 200) {
+      cfg = { cls: "marker-medium", size: 35 };
+    } else if (total < 500) {
+      cfg = { cls: "marker-large", size: 40 };
+    } else {
+      cfg = { cls: "marker-giant", size: 45 };
+    }
 
     return L.divIcon({
-      html: `<div class="marker-group">${totalCount}</div>`,
-      className: 'marker-cluster-custom',
-      iconSize: L.point(40, 40, true)
+      html: `<div class="marker-group ${cfg.cls}">${total}</div>`,
+      className: "marker-cluster-custom",
+      iconSize: L.point(cfg.size, cfg.size, true),
     });
-  }
+  },
 });
 
-const myMarker = L.divIcon({className: 'marker'});
-
 function setPlaces(places: Places[]) {
-  if (places && places.length > 0) {
-    // Aggiungi marker al gruppo
-    places.forEach((p) => {
-      const marker = L.marker([p.lat, p.lng], {
-        icon: L.divIcon({
-          html: `<div class="marker-group">${p.count}</div>`,
-          className: 'marker-cluster-custom',
-        })
-      })
-      .bindPopup(`
-        <div style="font-weight:bold;color:red;"><a style="color: inherit; text-decoration: none;" href="${p.link}${p.label.id}" target="_blank">${p.count}, ${p.label.name}</a></div>
-        <div>Latitudine: ${p.lat}</div>
-        <div>Longitudine: ${p.lng}</div>
-      `);
-      // AGGIUNGI QUESTA RIGA
-      (marker as any).options.customCount = p.count;
-      markers.addLayer(marker);
-    });
+  if (!places?.length) return;
 
+  places.forEach((p) => {
+    const marker = L.marker([p.lat, p.lng], {
+      icon: L.divIcon({
+        html: `<div class="marker-group marker-default">${p.count}</div>`,
+        className: "marker-cluster-custom",
+      }),
+    }).bindPopup(`
+      <div style="font-weight:bold;color:#AE0B24;">
+        <a style="color: inherit; text-decoration: none;" href="https://alumni.unitn.it/directory/alumni?al_loc%5B%5D=${p.id}" target="_blank">
+          ${p.count}, ${p.name}
+        </a>
+      </div>
+      <div>Latitudine: ${p.lat}</div>
+      <div>Longitudine: ${p.lng}</div>
+    `);
 
-    // Aggiungi il gruppo alla mappa
-    map.addLayer(markers);
-  }
+    (marker as any).options.customCount = p.count;
+    markers.addLayer(marker);
+  });
+
+  map.addLayer(markers);
 }
 
 window.setPlaces = setPlaces;

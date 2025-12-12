@@ -5,8 +5,8 @@ export {
 interface Places {
     lat: number;
     lng: number;
-    label: { name: string; id: number };
-    link: string;
+    name: string; 
+    id: number;
     count: number;
 }
 declare global {
