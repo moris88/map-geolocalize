@@ -1,12 +1,16 @@
-export {};
+export {
+  Places
+};
+
+interface Places {
+    lat: number;
+    lng: number;
+    name: string; 
+    id: number;
+    count: number;
+}
 declare global {
   interface Window {
-    setPlaces: (places: {
-        lat: number;
-        lng: number;
-        label: string;
-        link: string;
-        name: string;
-    }[]) => void;
+    setPlaces: (places: Places[]) => void;
   }
 }

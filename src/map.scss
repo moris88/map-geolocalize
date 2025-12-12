@@ -1,0 +1,45 @@
+$cluster-color: #AE0B24;
+
+#map {
+  @apply w-full h-[97vh] border border-gray-300 rounded;
+}
+
+.leaflet-container {
+  @apply font-sans;
+}
+
+.marker, .marker-group {
+  @apply flex items-center justify-center rounded-full font-bold transition-transform duration-200;
+
+  &-default { @apply w-5 h-5 min-w-[20px] min-h-[20px] bg-[$cluster-color] shadow; }
+  &-tiny { @apply w-5 h-5 min-w-[20px] min-h-[20px]; }
+  &-small { @apply w-7 h-7 min-w-[30px] min-h-[30px]; }
+  &-medium { @apply w-10 h-10 min-w-[40px] min-h-[40px]; }
+  &-large { @apply w-12 h-12 min-w-[50px] min-h-[50px]; }
+  &-giant { @apply w-16 h-16 min-w-[60px] min-h-[60px]; }
+
+  &:hover {
+    @apply scale-125 shadow-xl;
+  }
+}
+
+.marker-group {
+  @apply bg-[$cluster-color] text-white text-sm shadow-md;
+
+  &:hover {
+    @apply scale-110 shadow-2xl;
+  }
+}
+
+.leaflet-control-zoom {
+  @apply flex flex-row w-auto gap-2 !border-none;
+
+  .leaflet-control-zoom-in,
+  .leaflet-control-zoom-out {
+    @apply !rounded !shadow;
+  }
+}
+
+.leaflet-control-attribution {
+  @apply hidden !important;
+}
