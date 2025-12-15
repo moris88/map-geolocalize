@@ -12,5 +12,7 @@ interface Places {
 declare global {
   interface Window {
     setPlaces: (places: Places[]) => void;
+    setPlacesAmCharts: (places: Places[]) => void;
+    rootAmCharts: any;
   }
 }

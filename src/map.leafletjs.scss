@@ -1,6 +1,6 @@
 $cluster-color: #AE0B24;
 
-#map {
+.map {
   @apply w-full h-[97vh] border border-gray-300 rounded;
 }
 
@@ -9,9 +9,11 @@ $cluster-color: #AE0B24;
 }
 
 .marker, .marker-group {
-  @apply flex items-center justify-center rounded-full font-bold transition-transform duration-200;
+  @apply flex items-center justify-center rounded-full font-bold
+         transition-transform duration-200
+         px-2 whitespace-nowrap leading-none text-white;
 
-  &-default { @apply w-5 h-5 min-w-[20px] min-h-[20px] bg-[$cluster-color] shadow; }
+  &-default { @apply min-w-[20px] min-h-[20px] h-auto w-auto bg-[$cluster-color] shadow rounded-full inline-flex items-center justify-center; }
   &-tiny { @apply w-5 h-5 min-w-[20px] min-h-[20px]; }
   &-small { @apply w-7 h-7 min-w-[30px] min-h-[30px]; }
   &-medium { @apply w-10 h-10 min-w-[40px] min-h-[40px]; }
@@ -24,10 +26,10 @@ $cluster-color: #AE0B24;
 }
 
 .marker-group {
-  @apply bg-[$cluster-color] text-white text-sm shadow-md;
+  @apply bg-[$cluster-color] text-white text-sm shadow-md opacity-60;
 
   &:hover {
-    @apply scale-110 shadow-2xl;
+    @apply scale-110 shadow-2xl opacity-100 transition-all;
   }
 }
 
